@@ -3,7 +3,7 @@ name = "orange-meets-development"
 account_id = "8477399eb04accc1792af96aeaa25222"
 main = "./build/index.js"
 # https://developers.cloudflare.com/workers/platform/compatibility-dates
-compatibility_date = "2024-10-07"
+compatibility_date = "2024-12-31"
 compatibility_flags = ["nodejs_compat"]
 
 [site]
@@ -23,8 +23,8 @@ name = "rooms"
 class_name = "ChatRoom"
 
 [vars]
-CALLS_APP_ID = "f0ea263009299383d09d44b9fad5316c"
-TURN_SERVICE_ID = "124bb066f462e966159bc4eef4b42048"
+CALLS_APP_ID = "76c13628ec2a273841e8ff4450c5c91a"
+TURN_SERVICE_ID = "34374aea6f07339938dffad3df2e1b67"
 
 [[queues.producers]]
  queue = "orange-meets-feedback-queue-development"

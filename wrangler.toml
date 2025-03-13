@@ -8,10 +8,10 @@ compatibility_flags = ["nodejs_compat"]
   bucket = "./public"
 
 [vars]
-CALLS_APP_ID = "YOUR_CALLS_SFU_APP_ID_HERE"
+CALLS_APP_ID = "4753c611fae2a57525af4a72f93e5a79"
 
 # Optional vars
-# OPENAI_MODEL_ENDPOINT = ""
+OPENAI_MODEL_ENDPOINT = "https://api.openai.com/v1/realtime"
 
 [[durable_objects.bindings]]
 name = "rooms"

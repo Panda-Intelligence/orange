@@ -23,8 +23,8 @@ name = "rooms"
 class_name = "ChatRoom"
 
 [vars]
-CALLS_APP_ID = "700932c6384d6f4ba19838afa3ab93cd"
-TURN_SERVICE_ID = "53fa66872a8636170428abae9b049193"
+CALLS_APP_ID = "4753c611fae2a57525af4a72f93e5a79"
+TURN_SERVICE_ID = "c236ebd55632541946273bdf41ca0331"
 
 [[queues.producers]]
  queue = "orange-meets-feedback-queue"

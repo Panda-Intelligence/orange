@@ -64,6 +64,8 @@ export const Participant = forwardRef<
 		traceLink,
 		partyTracks,
 		dataSaverMode,
+		simulcastEnabled,
+		audioOnlyMode,
 		pinnedTileIds,
 		setPinnedTileIds,
 		showDebugInfo,
@@ -81,9 +83,16 @@ export const Participant = forwardRef<
 	const pulledAudioTrack = usePulledAudioTrack(
 		isScreenShare ? undefined : user.tracks.audio
 	)
-	const shouldPullVideo = isScreenShare || (!isSelf && !dataSaverMode)
+	const shouldPullVideo = isScreenShare || (!isSelf && !audioOnlyMode)
+	let preferredRid: string | undefined = undefined
+	if (!isScreenShare && simulcastEnabled) {
+		// If datasaver mode is off, we want server-side bandwidth estimation and switching
+		// so we will specify empty string to indicate we have no preferredRid
+		preferredRid = dataSaverMode ? 'b' : ''
+	}
 	const pulledVideoTrack = usePulledVideoTrack(
-		shouldPullVideo ? user.tracks.video : undefined
+		shouldPullVideo ? user.tracks.video : undefined,
+		preferredRid
 	)
 	const audioTrack = isSelf ? userMedia.audioStreamTrack : pulledAudioTrack
 	const videoTrack =
@@ -91,7 +100,7 @@ export const Participant = forwardRef<
 
 	useDeadPulledTrackMonitor(
 		user.tracks.video,
-		user.transceiverSessionId,
+		identity?.transceiverSessionId,
 		!!user.tracks.video,
 		videoTrack,
 		user.name
@@ -99,7 +108,7 @@ export const Participant = forwardRef<
 
 	useDeadPulledTrackMonitor(
 		user.tracks.audio,
-		user.transceiverSessionId,
+		identity?.transceiverSessionId,
 		!!user.tracks.audio,
 		audioTrack,
 		user.name
@@ -137,7 +146,7 @@ export const Participant = forwardRef<
 						'relative max-w-[--participant-max-width] rounded-xl'
 					)}
 				>
-					{!isScreenShare && (
+					{!isScreenShare && !user.tracks.videoEnabled && (
 						<div
 							className={cn(
 								'absolute inset-0 h-full w-full grid place-items-center'
@@ -183,7 +192,7 @@ export const Participant = forwardRef<
 							{
 								'opacity-100': isScreenShare
 									? user.tracks.screenShareEnabled
-									: user.tracks.videoEnabled && (!dataSaverMode || isSelf),
+									: user.tracks.videoEnabled && (!audioOnlyMode || isSelf),
 							},
 							isSelf && isScreenShare && 'opacity-75'
 						)}
@@ -258,6 +267,9 @@ export const Participant = forwardRef<
 											audioMid && `audio mid: ${audioMid}`,
 											videoMid && `video mid: ${videoMid}`,
 											`vid size: ${videoWidth}x${videoHeight}`,
+											!isSelf &&
+												preferredRid &&
+												`preferredRid: ${preferredRid}`,
 										]
 											.filter(Boolean)
 											.join(' ')}

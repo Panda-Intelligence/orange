@@ -25,6 +25,7 @@ class_name = "ChatRoom"
 [vars]
 CALLS_APP_ID = "76c13628ec2a273841e8ff4450c5c91a"
 TURN_SERVICE_ID = "34374aea6f07339938dffad3df2e1b67"
+EXPERIMENTAL_SIMULCAST_ENABLED = "true"
 
 [[queues.producers]]
  queue = "orange-meets-feedback-queue-development"

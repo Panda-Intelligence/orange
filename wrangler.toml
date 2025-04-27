@@ -8,7 +8,7 @@ compatibility_flags = ["nodejs_compat"]
   bucket = "./public"
 
 [vars]
-CALLS_APP_ID = "4753c611fae2a57525af4a72f93e5a79"
+CALLS_APP_ID = "76c13628ec2a273841e8ff4450c5c91a"
 
 # Optional vars
 OPENAI_MODEL_ENDPOINT = "https://api.openai.com/v1/realtime"

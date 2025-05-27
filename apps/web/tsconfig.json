@@ -1,8 +1,19 @@
 {
-	"include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "vitest.config.mts"],
+	"include": [
+		"remix.env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"vitest.config.mts"
+	],
 	"compilerOptions": {
-		"lib": ["DOM", "DOM.Iterable", "ES2019"],
-		"types": ["@cloudflare/workers-types"],
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ES2019"
+		],
+		"types": [
+			"@cloudflare/workers-types"
+		],
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
@@ -17,9 +28,13 @@
 		"baseUrl": ".",
 		"skipLibCheck": true,
 		"paths": {
-			"~/*": ["./app/*"]
+			"~/*": [
+				"./app/*"
+			],
+			"@panda-ai/meet-ui": [
+				"../../packages/ui/src"
+			]
 		},
-
 		// Remix takes care of building everything in `remix build`.
 		"noEmit": true
 	}

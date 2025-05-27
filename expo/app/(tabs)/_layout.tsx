@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Video, Settings } from 'lucide-react-native';
+import { Video, Settings, Calendar } from 'lucide-react-native';
 import colors from '@/constants/colors';
 
 export default function TabLayout() {
@@ -25,6 +25,13 @@ export default function TabLayout() {
         options={{
           title: "Meetings",
           tabBarIcon: ({ color }) => <Video size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: "Schedule",
+          tabBarIcon: ({ color }) => <Calendar size={24} color={color} />,
         }}
       />
       <Tabs.Screen

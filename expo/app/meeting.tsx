@@ -104,7 +104,7 @@ export default function MeetingScreen() {
 
     try {
       await Share.share({
-        message: `Join my GlassMeet video call with code: ${meetingId}`,
+        message: `Join my Panda Meet video call with code: ${meetingId}`,
       });
     } catch (error) {
       console.error('Error sharing meeting code:', error);

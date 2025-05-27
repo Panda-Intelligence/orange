@@ -22,7 +22,7 @@ export default function ModalScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={styles.title}>GlassMeet</Text>
+          <Text style={styles.title}>Panda Meet</Text>
           <Text style={styles.version}>Version 1.0.0</Text>
         </View>
 
@@ -82,7 +82,7 @@ export default function ModalScreen() {
         </GlassCard>
 
         <Text style={styles.footer}>
-          © 2025 GlassMeet. All rights reserved.
+          © 2025 Panda Meet. All rights reserved.
         </Text>
 
         <Text

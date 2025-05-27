@@ -100,7 +100,7 @@ export default function SettingsScreen() {
         </GlassCard>
 
         <View style={styles.footer}>
-          <Text style={styles.versionText}>GlassMeet v1.0.0</Text>
+          <Text style={styles.versionText}>Panda Meet v1.0.0</Text>
         </View>
       </ScrollView>
     </View>
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 16,
+    height: 200,
   },
   settingItem: {
     flexDirection: 'row',

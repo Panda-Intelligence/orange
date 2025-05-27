@@ -8,7 +8,7 @@ import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
 import { useMeetingStore } from '@/store/meetingStore';
 
-export default function HomeScreen() {
+export default function ScheduleScreen() {
   const router = useRouter();
   const [meetingCode, setMeetingCode] = useState('');
   const [userName, setUserName] = useState('');
@@ -51,19 +51,23 @@ export default function HomeScreen() {
     router.push('/meeting');
   };
 
+  const recentMeetings = [
+    { id: '1', title: 'Weekly Team Sync', participants: 8, time: '2 days ago' },
+    { id: '2', title: 'Product Review', participants: 5, time: '1 week ago' },
+    { id: '3', title: 'Design Workshop', participants: 12, time: '2 weeks ago' },
+  ];
+
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: 'Panda Meet',
+          title: 'Schedule',
           headerTitleStyle: styles.headerTitle,
         }}
       />
 
       <LinearGradient
-        colors={['#87CEFA', '#000000']} // 从浅蓝色(LightSkyBlue)到黑色
-        start={{ x: 0, y: 0 }} // 左上角开始
-        end={{ x: 1, y: 1 }} // 右下角结束
+        colors={['#F2F2F7', '#E5E5EA']}
         style={styles.background}
       />
 
@@ -79,43 +83,26 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        <GlassCard style={styles.joinCard}>
-          <Text style={styles.cardTitle}>Join or Create a Meeting</Text>
+        {recentMeetings.length > 0 && (
+          <View style={styles.recentSection}>
+            <Text style={styles.sectionTitle}>Recent Meetings</Text>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Your Name"
-            value={userName}
-            onChangeText={setUserName}
-            placeholderTextColor={colors.lightText}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Meeting Code"
-            value={meetingCode}
-            onChangeText={setMeetingCode}
-            placeholderTextColor={colors.lightText}
-            autoCapitalize="characters"
-          />
-
-          <View style={styles.buttonRow}>
-            <Button
-              title="Join Meeting"
-              onPress={handleJoinMeeting}
-              variant="primary"
-              style={styles.button}
-              icon={<Video size={18} color="white" />}
-            />
-            <Button
-              title="New Meeting"
-              onPress={handleCreateMeeting}
-              variant="glass"
-              style={styles.button}
-              icon={<Plus size={18} color={colors.primary} />}
-            />
+            {recentMeetings.map((meeting) => (
+              <GlassCard key={meeting.id} style={styles.recentCard}>
+                <View style={styles.recentCardContent}>
+                  <View>
+                    <Text style={styles.recentTitle}>{meeting.title}</Text>
+                    <Text style={styles.recentTime}>{meeting.time}</Text>
+                  </View>
+                  <View style={styles.participantsIndicator}>
+                    <Users size={14} color={colors.primary} />
+                    <Text style={styles.participantsText}>{meeting.participants}</Text>
+                  </View>
+                </View>
+              </GlassCard>
+            ))}
           </View>
-        </GlassCard>
+        )}
       </ScrollView>
     </View>
   );
@@ -163,7 +150,6 @@ const styles = StyleSheet.create({
   },
   joinCard: {
     marginBottom: 24,
-    height: 280,
   },
   cardTitle: {
     fontSize: 18,
@@ -180,11 +166,9 @@ const styles = StyleSheet.create({
     color: colors.text,
   },
   buttonRow: {
-    flexDirection: 'row',  // 移除多余的display: 'flex'
+    flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 8,
-    alignItems: 'center',  // 添加垂直居中对齐
-    height: Platform.OS === 'ios' ? 50 : 'auto', // 为iOS设置固定高度
   },
   button: {
     flex: 1,
@@ -201,6 +185,7 @@ const styles = StyleSheet.create({
   },
   recentCard: {
     marginBottom: 12,
+    height: 200,
   },
   recentCardContent: {
     flexDirection: 'row',

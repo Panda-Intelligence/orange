@@ -17,3 +17,6 @@ test-results
 
 .yalc
 yalc.lock
+.env.local
+expo/.expo
+expo/ios

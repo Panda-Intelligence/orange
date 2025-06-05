@@ -21,7 +21,14 @@
       "buildNumber": "1",
       "supportsTablet": true,
       "bundleIdentifier": "ai.pandacat.app.ios.panda-meet",
-      "appleTeamId": "UFT75NKJF6"
+      "appleTeamId": "UFT75NKJF6",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "locales": {
+      "en": "./assets/languages/en.json",
+      "zh": "./assets/languages/zh.json"
     },
     "android": {
       "adaptiveIcon": {

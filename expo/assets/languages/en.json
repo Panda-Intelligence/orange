@@ -1,0 +1,4 @@
+{
+  "NSCameraUsageDescription": "This app needs access to your camera for video meetings",
+  "NSMicrophoneUsageDescription": "This app needs access to your microphone for voice calls"
+}

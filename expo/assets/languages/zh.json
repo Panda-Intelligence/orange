@@ -1,0 +1,4 @@
+{
+  "NSCameraUsageDescription": "此应用需要访问您的相机以进行视频会议",
+  "NSMicrophoneUsageDescription": "此应用需要访问您的麦克风以进行语音通话"
+}

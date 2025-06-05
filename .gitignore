@@ -21,3 +21,4 @@ yalc.lock
 expo/.expo
 expo/ios
 .turbo
+expo/android

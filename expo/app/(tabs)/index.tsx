@@ -8,7 +8,7 @@ import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
 import { useMeetingStore } from '@/store/meetingStore';
 import { useTranslation } from 'react-i18next';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
@@ -60,7 +60,7 @@ export default function HomeScreen() {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
           title: 'GlassMeet',
@@ -144,7 +144,7 @@ export default function HomeScreen() {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -7,6 +7,7 @@ import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
 import { useTranslation } from 'react-i18next';
 import { setLanguage } from '@/i18n';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SettingsScreen() {
   const { t, i18n } = useTranslation();
@@ -16,7 +17,7 @@ export default function SettingsScreen() {
   const [darkMode, setDarkMode] = useState(false);
   const [lowDataMode, setLowDataMode] = useState(false);
   const [e2eEncryption, setE2eEncryption] = useState(true);
-  
+
   // 切换语言
   const toggleLanguage = async () => {
     const newLanguage = i18n.language === 'en' ? 'zh' : 'en';
@@ -24,7 +25,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
           title: t('settings.title'),
@@ -94,9 +95,9 @@ export default function SettingsScreen() {
             value={lowDataMode}
             onValueChange={setLowDataMode}
           />
-          
+
           <View style={styles.divider} />
-          
+
           {/* 添加语言选择项 */}
           <TouchableOpacity onPress={toggleLanguage} style={styles.settingItem}>
             <View style={styles.settingIcon}>
@@ -126,7 +127,7 @@ export default function SettingsScreen() {
           <Text style={styles.versionText}>{t('settings.version')}</Text>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.lightText,
   },
-  
+
   // 添加语言值的样式
   languageValue: {
     fontSize: 16,

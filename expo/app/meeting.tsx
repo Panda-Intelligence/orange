@@ -22,13 +22,12 @@ import ParticipantsPanel from '@/components/ParticipantsPanel';
 import colors from '@/constants/colors';
 import { Copy } from 'lucide-react-native';
 import SelfVideoView from '@/components/SelfVideoView';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function MeetingScreen() {
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-  const insets = useSafeAreaInsets()
   // Meeting state from store
   const {
     meetingId,
@@ -146,7 +145,6 @@ export default function MeetingScreen() {
 
       <View style={[
         styles.participantsGrid,
-        { paddingTop: insets.top },
         isChatOpen || isParticipantsOpen ? styles.participantsGridWithPanel : null
       ]}>
         <FlatList

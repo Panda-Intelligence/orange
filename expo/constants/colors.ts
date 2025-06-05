@@ -1,3 +1,5 @@
+import { BlurTint } from "expo-blur";
+
 // iOS-inspired color palette
 export default {
   primary: '#007AFF', // iOS blue
@@ -11,5 +13,5 @@ export default {
   warning: '#FF9500', // iOS orange
   border: 'rgba(60, 60, 67, 0.1)',
   overlay: 'rgba(0, 0, 0, 0.4)',
-  blurTint: 'light',
+  blurTint: 'light' as BlurTint,
 };

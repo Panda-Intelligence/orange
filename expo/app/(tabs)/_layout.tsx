@@ -16,6 +16,7 @@ export default function TabLayout() {
         headerStyle: {
           backgroundColor: colors.background,
         },
+        headerShown: false,
         headerTintColor: colors.text,
         headerShadowVisible: false,
       }}

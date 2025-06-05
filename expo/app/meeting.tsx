@@ -13,8 +13,7 @@ import {
 import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image } from 'expo-image';
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { useCameraPermissions } from 'expo-camera';
 import { useMeetingStore } from '@/store/meetingStore';
 import MeetingControls from '@/components/MeetingControls';
 import ParticipantVideo from '@/components/ParticipantVideo';
@@ -22,18 +21,19 @@ import ChatPanel from '@/components/ChatPanel';
 import ParticipantsPanel from '@/components/ParticipantsPanel';
 import colors from '@/constants/colors';
 import { Copy } from 'lucide-react-native';
+import SelfVideoView from '@/components/SelfVideoView';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function MeetingScreen() {
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
-
+  const insets = useSafeAreaInsets()
   // Meeting state from store
   const {
     meetingId,
     meetingTitle,
     isHost,
-    userName,
     isMuted,
     isVideoOn,
     isChatOpen,
@@ -111,44 +111,6 @@ export default function MeetingScreen() {
     }
   };
 
-  // Render camera or placeholder based on permissions and platform
-  const renderSelfVideo = () => {
-    if (Platform.OS === 'web' || !permission?.granted) {
-      // Placeholder for web or when no permission
-      return (
-        <View style={styles.cameraPlaceholder}>
-          {!isVideoOn ? (
-            <View style={styles.avatarContainer}>
-              <Text style={styles.avatarText}>{userName.charAt(0).toUpperCase()}</Text>
-            </View>
-          ) : (
-            <Image
-              source={{ uri: videoUrls['1'] }}
-              style={styles.placeholderImage}
-              contentFit="cover"
-            />
-          )}
-        </View>
-      );
-    }
-
-    // Native camera view
-    return (
-      <View style={styles.cameraContainer}>
-        {isVideoOn ? (
-          <CameraView
-            style={styles.camera}
-            facing={'front' as CameraType}
-          />
-        ) : (
-          <View style={styles.avatarContainer}>
-            <Text style={styles.avatarText}>{userName.charAt(0).toUpperCase()}</Text>
-          </View>
-        )}
-      </View>
-    );
-  };
-
   // If no meeting ID, redirect to home
   if (!meetingId) {
     router.replace('/');
@@ -156,11 +118,12 @@ export default function MeetingScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
           title: meetingTitle || 'Meeting',
           headerTitleStyle: styles.headerTitle,
+          headerShown: false, // 隐藏 header
           headerRight: () => (
             <View style={styles.headerRight}>
               <Text style={styles.meetingIdText}>ID: {meetingId}</Text>
@@ -183,6 +146,7 @@ export default function MeetingScreen() {
 
       <View style={[
         styles.participantsGrid,
+        { paddingTop: insets.top },
         isChatOpen || isParticipantsOpen ? styles.participantsGridWithPanel : null
       ]}>
         <FlatList
@@ -194,7 +158,7 @@ export default function MeetingScreen() {
             if (item.id === '1') {
               return (
                 <View style={[styles.participantContainer, { flex: 1 / columns }]}>
-                  {renderSelfVideo()}
+                  <SelfVideoView />
                   <View style={styles.nameTag}>
                     <Text style={styles.nameText}>{item.name}</Text>
                     {item.isMuted && (
@@ -245,7 +209,7 @@ export default function MeetingScreen() {
         onLeave={handleLeave}
         onShare={handleShare}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

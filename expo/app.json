@@ -61,7 +61,8 @@
             "buildNumber": "1"
           }
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "tsconfigPaths": true,

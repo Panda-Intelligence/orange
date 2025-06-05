@@ -8,6 +8,9 @@ import colors from "@/constants/colors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { trpc, trpcClient } from "@/lib/trpc";
 
+// 导入 i18n 配置
+import "@/i18n";
+
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)",
@@ -60,7 +63,7 @@ function RootLayoutNav() {
         },
         headerTintColor: colors.text,
         headerShadowVisible: false,
-        headerBackTitleVisible: Platform.OS === 'ios',
+        // headerBackTitleVisible: Platform.OS === 'ios',
         animation: Platform.OS === 'ios' ? 'default' : 'fade',
       }}
     >

@@ -7,8 +7,10 @@ import Button from '@/components/Button';
 import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
 import { useMeetingStore } from '@/store/meetingStore';
+import { useTranslation } from 'react-i18next';
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [meetingCode, setMeetingCode] = useState('');
   const [userName, setUserName] = useState('');
@@ -17,12 +19,12 @@ export default function HomeScreen() {
 
   const handleJoinMeeting = () => {
     if (!meetingCode.trim()) {
-      Alert.alert('Error', 'Please enter a meeting code');
+      Alert.alert('Error', t('errors.enterMeetingCode'));
       return;
     }
 
     if (!userName.trim()) {
-      Alert.alert('Error', 'Please enter your name');
+      Alert.alert('Error', t('errors.enterName'));
       return;
     }
 
@@ -36,7 +38,7 @@ export default function HomeScreen() {
 
   const handleCreateMeeting = () => {
     if (!userName.trim()) {
-      Alert.alert('Error', 'Please enter your name');
+      Alert.alert('Error', t('errors.enterName'));
       return;
     }
 
@@ -77,18 +79,18 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.heroSection}>
-          <Text style={styles.heroTitle}>Crystal Clear Video Meetings</Text>
+          <Text style={styles.heroTitle}>{t('home.title')}</Text>
           <Text style={styles.heroSubtitle}>
-            Connect with your team through beautiful, distraction-free video calls
+            {t('home.subtitle')}
           </Text>
         </View>
 
         <GlassCard style={styles.joinCard}>
-          <Text style={styles.cardTitle}>Join or Create a Meeting</Text>
+          <Text style={styles.cardTitle}>{t('home.joinCard.title')}</Text>
 
           <TextInput
             style={styles.input}
-            placeholder="Your Name"
+            placeholder={t('home.joinCard.yourName')}
             value={userName}
             onChangeText={setUserName}
             placeholderTextColor={colors.lightText}
@@ -96,7 +98,7 @@ export default function HomeScreen() {
 
           <TextInput
             style={styles.input}
-            placeholder="Meeting Code"
+            placeholder={t('home.joinCard.meetingCode')}
             value={meetingCode}
             onChangeText={setMeetingCode}
             placeholderTextColor={colors.lightText}
@@ -105,14 +107,14 @@ export default function HomeScreen() {
 
           <View style={styles.buttonRow}>
             <Button
-              title="Join Meeting"
+              title={t('home.joinCard.joinMeeting')}
               onPress={handleJoinMeeting}
               variant="primary"
               style={styles.button}
               icon={<Video size={18} color="white" />}
             />
             <Button
-              title="New Meeting"
+              title={t('home.joinCard.newMeeting')}
               onPress={handleCreateMeeting}
               variant="glass"
               style={styles.button}
@@ -123,7 +125,7 @@ export default function HomeScreen() {
 
         {recentMeetings.length > 0 && (
           <View style={styles.recentSection}>
-            <Text style={styles.sectionTitle}>Recent Meetings</Text>
+            <Text style={styles.sectionTitle}>{t('home.recentMeetings')}</Text>
 
             {recentMeetings.map((meeting) => (
               <GlassCard key={meeting.id} style={styles.recentCard}>

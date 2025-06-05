@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Switch, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Switch, ScrollView, TouchableOpacity } from 'react-native';
 import { Stack } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Mic, Video, Bell, Moon, Wifi, Lock } from 'lucide-react-native';
+import { Mic, Video, Bell, Moon, Wifi, Lock, Globe } from 'lucide-react-native';
 import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
+import { useTranslation } from 'react-i18next';
+import { setLanguage } from '@/i18n';
 
 export default function SettingsScreen() {
+  const { t, i18n } = useTranslation();
   const [autoMute, setAutoMute] = useState(true);
   const [autoVideo, setAutoVideo] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [lowDataMode, setLowDataMode] = useState(false);
   const [e2eEncryption, setE2eEncryption] = useState(true);
+  
+  // 切换语言
+  const toggleLanguage = async () => {
+    const newLanguage = i18n.language === 'en' ? 'zh' : 'en';
+    await setLanguage(newLanguage);
+  };
 
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: 'Settings',
+          title: t('settings.title'),
           headerTitleStyle: styles.headerTitle,
         }}
       />
@@ -33,13 +42,13 @@ export default function SettingsScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.sectionTitle}>Meeting Preferences</Text>
+        <Text style={styles.sectionTitle}>{t('settings.meetingPreferences')}</Text>
 
         <GlassCard style={styles.card}>
           <SettingItem
             icon={<Mic size={22} color={colors.primary} />}
-            title="Join Meetings Muted"
-            description="Automatically mute your microphone when joining meetings"
+            title={t('settings.joinMuted.title')}
+            description={t('settings.joinMuted.description')}
             value={autoMute}
             onValueChange={setAutoMute}
           />
@@ -48,20 +57,20 @@ export default function SettingsScreen() {
 
           <SettingItem
             icon={<Video size={22} color={colors.primary} />}
-            title="Join with Video Off"
-            description="Turn off your camera when joining meetings"
+            title={t('settings.joinVideoOff.title')}
+            description={t('settings.joinVideoOff.description')}
             value={autoVideo}
             onValueChange={setAutoVideo}
           />
         </GlassCard>
 
-        <Text style={styles.sectionTitle}>App Settings</Text>
+        <Text style={styles.sectionTitle}>{t('settings.appSettings')}</Text>
 
         <GlassCard style={styles.card}>
           <SettingItem
             icon={<Bell size={22} color={colors.primary} />}
-            title="Notifications"
-            description="Receive notifications for meetings and messages"
+            title={t('settings.notifications.title')}
+            description={t('settings.notifications.description')}
             value={notifications}
             onValueChange={setNotifications}
           />
@@ -70,8 +79,8 @@ export default function SettingsScreen() {
 
           <SettingItem
             icon={<Moon size={22} color={colors.primary} />}
-            title="Dark Mode"
-            description="Use dark theme throughout the app"
+            title={t('settings.darkMode.title')}
+            description={t('settings.darkMode.description')}
             value={darkMode}
             onValueChange={setDarkMode}
           />
@@ -80,27 +89,41 @@ export default function SettingsScreen() {
 
           <SettingItem
             icon={<Wifi size={22} color={colors.primary} />}
-            title="Low Data Mode"
-            description="Reduce data usage during video calls"
+            title={t('settings.lowDataMode.title')}
+            description={t('settings.lowDataMode.description')}
             value={lowDataMode}
             onValueChange={setLowDataMode}
           />
+          
+          <View style={styles.divider} />
+          
+          {/* 添加语言选择项 */}
+          <TouchableOpacity onPress={toggleLanguage} style={styles.settingItem}>
+            <View style={styles.settingIcon}>
+              <Globe size={22} color={colors.primary} />
+            </View>
+            <View style={styles.settingContent}>
+              <Text style={styles.settingTitle}>{t('settings.language.title')}</Text>
+              <Text style={styles.settingDescription}>{t('settings.language.description')}</Text>
+            </View>
+            <Text style={styles.languageValue}>{i18n.language === 'en' ? 'English' : '中文'}</Text>
+          </TouchableOpacity>
         </GlassCard>
 
-        <Text style={styles.sectionTitle}>Privacy & Security</Text>
+        <Text style={styles.sectionTitle}>{t('settings.privacySecurity')}</Text>
 
         <GlassCard style={styles.card}>
           <SettingItem
             icon={<Lock size={22} color={colors.primary} />}
-            title="End-to-End Encryption"
-            description="Enable encryption for all meetings"
+            title={t('settings.e2eEncryption.title')}
+            description={t('settings.e2eEncryption.description')}
             value={e2eEncryption}
             onValueChange={setE2eEncryption}
           />
         </GlassCard>
 
         <View style={styles.footer}>
-          <Text style={styles.versionText}>GlassMeet v1.0.0</Text>
+          <Text style={styles.versionText}>{t('settings.version')}</Text>
         </View>
       </ScrollView>
     </View>
@@ -206,5 +229,12 @@ const styles = StyleSheet.create({
   versionText: {
     fontSize: 14,
     color: colors.lightText,
+  },
+  
+  // 添加语言值的样式
+  languageValue: {
+    fontSize: 16,
+    color: colors.primary,
+    fontWeight: '500',
   },
 });

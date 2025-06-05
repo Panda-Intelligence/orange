@@ -1,0 +1,65 @@
+{
+  "common": {
+    "back": "Back"
+  },
+  "home": {
+    "title": "Crystal Clear Video Meetings",
+    "subtitle": "Connect with your team through beautiful, distraction-free video calls",
+    "joinCard": {
+      "title": "Join or Create a Meeting",
+      "yourName": "Your Name",
+      "meetingCode": "Meeting Code",
+      "joinMeeting": "Join Meeting",
+      "newMeeting": "New Meeting"
+    },
+    "recentMeetings": "Recent Meetings"
+  },
+  "settings": {
+    "title": "Settings",
+    "meetingPreferences": "Meeting Preferences",
+    "appSettings": "App Settings",
+    "privacySecurity": "Privacy & Security",
+    "joinMuted": {
+      "title": "Join Meetings Muted",
+      "description": "Automatically mute your microphone when joining meetings"
+    },
+    "joinVideoOff": {
+      "title": "Join with Video Off",
+      "description": "Turn off your camera when joining meetings"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Receive notifications for meetings and messages"
+    },
+    "darkMode": {
+      "title": "Dark Mode",
+      "description": "Use dark theme throughout the app"
+    },
+    "lowDataMode": {
+      "title": "Low Data Mode",
+      "description": "Reduce data usage during video calls"
+    },
+    "e2eEncryption": {
+      "title": "End-to-End Encryption",
+      "description": "Enable encryption for all meetings"
+    },
+    "language": {
+      "title": "Language",
+      "description": "Change the application language"
+    },
+    "version": "GlassMeet v1.0.0"
+  },
+  "meeting": {
+    "leave": "Leave",
+    "chat": "Chat",
+    "participants": "Participants",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "videoOn": "Video On",
+    "videoOff": "Video Off"
+  },
+  "errors": {
+    "enterName": "Please enter your name",
+    "enterMeetingCode": "Please enter a meeting code"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "common": {
+    "back": "返回"
+  },
+  "home": {
+    "title": "清晰视频会议",
+    "subtitle": "通过美观、无干扰的视频通话与您的团队连接",
+    "joinCard": {
+      "title": "加入或创建会议",
+      "yourName": "您的姓名",
+      "meetingCode": "会议代码",
+      "joinMeeting": "加入会议",
+      "newMeeting": "新建会议"
+    },
+    "recentMeetings": "最近的会议"
+  },
+  "settings": {
+    "title": "设置",
+    "meetingPreferences": "会议偏好",
+    "appSettings": "应用设置",
+    "privacySecurity": "隐私与安全",
+    "joinMuted": {
+      "title": "加入会议时静音",
+      "description": "加入会议时自动将麦克风静音"
+    },
+    "joinVideoOff": {
+      "title": "加入时关闭视频",
+      "description": "加入会议时关闭摄像头"
+    },
+    "notifications": {
+      "title": "通知",
+      "description": "接收会议和消息的通知"
+    },
+    "darkMode": {
+      "title": "深色模式",
+      "description": "在整个应用中使用深色主题"
+    },
+    "lowDataMode": {
+      "title": "低数据模式",
+      "description": "在视频通话期间减少数据使用"
+    },
+    "e2eEncryption": {
+      "title": "端到端加密",
+      "description": "为所有会议启用加密"
+    },
+    "language": {
+      "title": "语言",
+      "description": "更改应用程序语言"
+    },
+    "version": "GlassMeet v1.0.0"
+  },
+  "meeting": {
+    "leave": "离开",
+    "chat": "聊天",
+    "participants": "参与者",
+    "mute": "静音",
+    "unmute": "取消静音",
+    "videoOn": "开启视频",
+    "videoOff": "关闭视频"
+  },
+  "errors": {
+    "enterName": "请输入您的姓名",
+    "enterMeetingCode": "请输入会议代码"
+  }
+}

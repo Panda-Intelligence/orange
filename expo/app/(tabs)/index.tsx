@@ -69,8 +69,10 @@ export default function HomeScreen() {
       />
 
       <LinearGradient
-        colors={['#F2F2F7', '#E5E5EA']}
+        colors={colors.gradients.background as any}
         style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       />
 
       <ScrollView
@@ -176,17 +178,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heroTitle: {
-    fontSize: 28,
-    fontWeight: '700',
+    fontSize: 32,
+    fontWeight: 'bold',
     color: colors.text,
     textAlign: 'center',
     marginBottom: 8,
+    // 添加文字发光效果
+    textShadowColor: colors.primary,
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
   },
   heroSubtitle: {
     fontSize: 16,
-    color: colors.lightText,
+    color: colors.textSecondary,
     textAlign: 'center',
-    maxWidth: '80%',
+    lineHeight: 24,
   },
   joinCard: {
     marginBottom: 24,

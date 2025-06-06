@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import colors from '@/constants/colors';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface ButtonProps {
   title: string;
@@ -34,9 +35,8 @@ export default function Button({
   textStyle,
   icon
 }: ButtonProps) {
+  const baseStyle = [styles.button, styles[size]];
   const getButtonStyle = () => {
-    const baseStyle = [styles.button, styles[size]];
-
     if (variant === 'glass') {
       return [...baseStyle, styles.glassButton, style];
     }
@@ -73,12 +73,19 @@ export default function Button({
   if (variant === 'glass') {
     return (
       <TouchableOpacity
+        style={[...baseStyle, styles.glassButton, style]}
         onPress={onPress}
-        disabled={disabled || loading}
-        style={[getButtonStyle(), disabled && styles.disabled]}
+        disabled={disabled}
       >
         <BlurView intensity={80} tint={colors.blurTint} style={styles.blurView}>
-          {renderContent()}
+          <LinearGradient
+            colors={colors.gradients.glass as any}
+            style={styles.gradientButton}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={[styles.glassText]}>{title}</Text>
+          </LinearGradient>
         </BlurView>
       </TouchableOpacity>
     );
@@ -112,9 +119,24 @@ const styles = StyleSheet.create({
   danger: {
     backgroundColor: colors.danger,
   },
+  primaryButton: {
+    backgroundColor: 'transparent', // 改为透明，使用渐变
+  },
+  gradientButton: {
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   glassButton: {
-    overflow: 'hidden',
     backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: colors.glassBorder,
+  },
+  glassText: {
+    color: colors.text,
+    fontWeight: '600',
   },
   blurView: {
     width: '100%',

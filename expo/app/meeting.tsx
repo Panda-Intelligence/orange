@@ -137,8 +137,10 @@ export default function MeetingScreen() {
       />
 
       <LinearGradient
-        colors={['#F2F2F7', '#E5E5EA']}
+        colors={colors.gradients.background}
         style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
       />
 
       <StatusBar style="dark" />

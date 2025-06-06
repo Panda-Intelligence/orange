@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView, Alert, Platform } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Video, Users, Plus } from 'lucide-react-native';
+import { Video, Plus } from 'lucide-react-native';
 import Button from '@/components/Button';
 import GlassCard from '@/components/GlassCard';
 import colors from '@/constants/colors';
@@ -53,17 +53,11 @@ export default function HomeScreen() {
     router.push('/meeting');
   };
 
-  const recentMeetings = [
-    { id: '1', title: 'Weekly Team Sync', participants: 8, time: '2 days ago' },
-    { id: '2', title: 'Product Review', participants: 5, time: '1 week ago' },
-    { id: '3', title: 'Design Workshop', participants: 12, time: '2 weeks ago' },
-  ];
-
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
-          title: 'GlassMeet',
+          title: 'Meet!',
           headerTitleStyle: styles.headerTitle,
         }}
       />
@@ -122,27 +116,6 @@ export default function HomeScreen() {
             />
           </View>
         </GlassCard>
-
-        {recentMeetings.length > 0 && (
-          <View style={styles.recentSection}>
-            <Text style={styles.sectionTitle}>{t('home.recentMeetings')}</Text>
-
-            {recentMeetings.map((meeting) => (
-              <GlassCard key={meeting.id} style={styles.recentCard}>
-                <View style={styles.recentCardContent}>
-                  <View>
-                    <Text style={styles.recentTitle}>{meeting.title}</Text>
-                    <Text style={styles.recentTime}>{meeting.time}</Text>
-                  </View>
-                  <View style={styles.participantsIndicator}>
-                    <Users size={14} color={colors.primary} />
-                    <Text style={styles.participantsText}>{meeting.participants}</Text>
-                  </View>
-                </View>
-              </GlassCard>
-            ))}
-          </View>
-        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -213,46 +186,5 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     marginHorizontal: 6,
-  },
-  recentSection: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.text,
-    marginBottom: 12,
-  },
-  recentCard: {
-    marginBottom: 12,
-  },
-  recentCardContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  recentTitle: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: colors.text,
-    marginBottom: 4,
-  },
-  recentTime: {
-    fontSize: 14,
-    color: colors.lightText,
-  },
-  participantsIndicator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 122, 255, 0.1)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  participantsText: {
-    marginLeft: 4,
-    fontSize: 14,
-    color: colors.primary,
-    fontWeight: '500',
-  },
+  }
 });

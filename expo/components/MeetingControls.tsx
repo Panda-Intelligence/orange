@@ -4,6 +4,7 @@ import { Mic, MicOff, Video, VideoOff, MessageCircle, Users, PhoneOff, Share2 } 
 import colors from '@/constants/colors';
 import { BlurView } from 'expo-blur';
 import { Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface MeetingControlsProps {
   isMuted: boolean;
@@ -26,10 +27,11 @@ export default function MeetingControls({
   onLeave,
   onShare
 }: MeetingControlsProps) {
+  const insets = useSafeAreaInsets();
   const ControlsContainer = Platform.OS === 'web' ? View : BlurView;
   const containerProps = Platform.OS === 'web'
-    ? { style: [styles.container, styles.webContainer] }
-    : { intensity: 60, tint: colors.blurTint, style: styles.container };
+    ? { style: [styles.container, styles.webContainer, { paddingBottom: 16 + insets.bottom }] }
+    : { intensity: 60, tint: colors.blurTint, style: [styles.container, { paddingBottom: 16 + insets.bottom }] };
 
   return (
     // @ts-ignore - BlurView props are different from View props
@@ -110,6 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
   controlButton: {
     width: 50,
